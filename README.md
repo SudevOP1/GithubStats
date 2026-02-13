@@ -1,6 +1,6 @@
 # GitHub Stats Dashboard 📊
 
-Web dashboard for visualizing and monitoring GitHub repository statistics in real-time. Perfect for hackathons, team dashboards, and repository analytics.<br>
+Web dashboard for visualizing and monitoring GitHub repository statistics in real-time. Perfect for hackathon repo monitoring and analytics.<br>
 
 ## 🚀 Quick Start
 
