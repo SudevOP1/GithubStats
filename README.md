@@ -1,6 +1,16 @@
 # GitHub Stats Dashboard 📊
 
-Web dashboard for visualizing and monitoring GitHub repository statistics in real-time. Perfect for hackathons, team dashboards, and repository analytics.
+Web dashboard for visualizing and monitoring GitHub repository statistics in real-time. Perfect for hackathons, team dashboards, and repository analytics.<br>
+
+## 🚀 Quick Start
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The app will be available at `http://localhost:5173` (or the port shown in your terminal).<br>
 
 ## ✨ Features
 
@@ -23,12 +33,4 @@ Web dashboard for visualizing and monitoring GitHub repository statistics in rea
 - Smart Suggestions
 - API Warnings
 
-## 🚀 Quick Start
-
-```bash
-cd frontend
-npm install
-npm run dev
-```
-
-The app will be available at `http://localhost:5173` (or the port shown in your terminal).
+<br>
