@@ -18,6 +18,7 @@ const RepoPage = () => {
   const [cacheTimestamp, setCacheTimestamp] = useState(null);
   const [nextRefreshTime, setNextRefreshTime] = useState(null);
   const [timeUntilRefresh, setTimeUntilRefresh] = useState(null);
+  const [lastRefreshTime, setLastRefreshTime] = useState(null);
 
   // Cache management functions
   const getCacheKey = (type) => `github-stats-${owner}-${repo}-${type}`;
@@ -279,6 +280,7 @@ const RepoPage = () => {
       setCommits(commitsWithStats);
       saveToCache("commits", commitsWithStats);
       setIsCachedData(false);
+      setLastRefreshTime(new Date());
       console.log("Final commits with stats:", commitsWithStats.length);
     } catch (err) {
       console.error("Fetch commits error:", err);
@@ -879,10 +881,16 @@ const RepoPage = () => {
               </button>
             </div>
 
-            {commitsLoading && (
+              {commitsLoading && (
               <div className="mt-3 text-sm text-sky-400">
                 Fetching commits...
               </div>
+            )}
+            
+            {lastRefreshTime && !commitsLoading && (
+              <p className="mt-3 text-xs text-gray-400">
+                Last refreshed: {lastRefreshTime.toLocaleString()}
+              </p>
             )}
           </div>
 
