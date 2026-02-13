@@ -63,12 +63,54 @@ const RepoPage = () => {
     return date.toLocaleString();
   };
 
-  const now = new Date();
-  const defaultUntil = new Date(now);
-  const defaultSince = new Date(now);
-  defaultSince.setDate(defaultSince.getDate() - 1);
-  const [since, setSince] = useState(defaultSince);
-  const [until, setUntil] = useState(defaultUntil);
+  // Initialize date ranges from localStorage or defaults
+  const initializeDateRanges = () => {
+    try {
+      const savedSince = localStorage.getItem(
+        `github-stats-${owner}-${repo}-since`,
+      );
+      const savedUntil = localStorage.getItem(
+        `github-stats-${owner}-${repo}-until`,
+      );
+
+      if (savedSince && savedUntil) {
+        return {
+          since: new Date(savedSince),
+          until: new Date(savedUntil),
+        };
+      }
+    } catch (err) {
+      console.warn("Failed to load date ranges from cache:", err);
+    }
+
+    // Default: last 1 day
+    const now = new Date();
+    const defaultUntil = new Date(now);
+    const defaultSince = new Date(now);
+    defaultSince.setDate(defaultSince.getDate() - 1);
+
+    return { since: defaultSince, until: defaultUntil };
+  };
+
+  const { since: initialSince, until: initialUntil } = initializeDateRanges();
+  const [since, setSince] = useState(initialSince);
+  const [until, setUntil] = useState(initialUntil);
+
+  // Save date ranges to localStorage whenever they change
+  useEffect(() => {
+    try {
+      localStorage.setItem(
+        `github-stats-${owner}-${repo}-since`,
+        since.toISOString(),
+      );
+      localStorage.setItem(
+        `github-stats-${owner}-${repo}-until`,
+        until.toISOString(),
+      );
+    } catch (err) {
+      console.warn("Failed to save date ranges to cache:", err);
+    }
+  }, [since, until, owner, repo]);
 
   useEffect(() => {
     const fetchContributors = async () => {
@@ -881,12 +923,12 @@ const RepoPage = () => {
               </button>
             </div>
 
-              {commitsLoading && (
+            {commitsLoading && (
               <div className="mt-3 text-sm text-sky-400">
                 Fetching commits...
               </div>
             )}
-            
+
             {lastRefreshTime && !commitsLoading && (
               <p className="mt-3 text-xs text-gray-400">
                 Last refreshed: {lastRefreshTime.toLocaleString()}
