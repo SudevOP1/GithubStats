@@ -5,7 +5,7 @@ import RepoPage from "./pages/RepoPage.jsx";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/GithubStats/">
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/:owner/:repo" element={<RepoPage />} />
