@@ -1,6 +1,7 @@
 # GitHub Stats Dashboard 📊
 
 Web dashboard for visualizing and monitoring GitHub repository statistics in real-time. Perfect for hackathon repo monitoring and analytics.<br>
+:link: [View Live](https://sudevop1.github.io/GithubStats)<br>
 
 ## 🚀 Quick Start
 
